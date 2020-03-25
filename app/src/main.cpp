@@ -25,8 +25,9 @@ void delay(int ms) {
 	k_sleep(K_MSEC(ms));
 }
 
-void setup(void) {	
+void setup(void) {
 
+		delay(990);
     settings_subsys_init();
 	// HW
 	LOG_INF("App setup: hardware");
@@ -35,7 +36,7 @@ void setup(void) {
 	backlight_init();
 	button_init();
 	display_init();
-	battery_init();	
+	battery_init();
 	bt_setup();
 
 	// Services
@@ -50,7 +51,7 @@ void setup(void) {
 
 	win_activate(win_home_get());
 	// TESTING:
-	win_activate(win_console_get());
+	//win_activate(win_console_get());
 
 	LOG_INF("App setup complete.");
 }

@@ -37,6 +37,34 @@ void draw_notify() {
 	notify_redraw = 0;
 }
 
+void draw_charging() {
+	bool charging = battery_get_charging();
+
+
+	static char text[16];
+	if(charging){
+
+		sprintf(text, "Charging");
+		tft->setTextColor(ST77XX_GREEN);
+	}
+	else{
+		sprintf(text, "No charging");
+		tft->setTextColor(ST77XX_RED);
+	}
+
+
+	int w = 200;
+	int h = 15;
+	int x = 0;
+	int y = 20;
+	tft->openBuffer(x, y, w, h);
+	tft->setCursor(x, y);
+	tft->setTextSize(2);
+	tft->fillRect(x, y, w, h, ST77XX_BLACK);
+	tft->print(text);
+	tft->flushBuffer();
+}
+
 void draw_battery() {
 	uint8_t battery_percent = battery_get_percent();
 
@@ -99,6 +127,7 @@ void home_loop()
 {
     uiw_clock_draw(tft, 46, 90, 5, UIW_CLOCK_FORMAT_HM);
 	draw_battery();
+	draw_charging();
 	draw_bt_status();
 	draw_notify();
 }
